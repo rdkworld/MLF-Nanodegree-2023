@@ -3,10 +3,10 @@
 
 ## Initial Training
 ### What did you realize when you tried to submit your predictions? What changes were needed to the output of the predictor to submit your results?
-When I submitted my predictions, I was wondering how seasonality/weather will impact demand for rental bikes and how model will consider that
+When I submitted my predictions, I was wondering how seasonality/weather will impact demand for rental bikes and how model will consider that. Also, if there were negative values it needed to reset to zero
 
 ### What was the top ranked model that performed?
-Top ranked model was one with new features with a score of 1.29553
+Top ranked model was LightGBMXT_BAG_L1 with score_val of -131.460909
 
 ## Exploratory data analysis and feature creation
 ### What did the exploratory analysis find and how did you add additional features?
@@ -25,9 +25,22 @@ I would try to think and add more features that would predict bike demand
 ### Create a table with the models you ran, the hyperparameters modified, and the kaggle score.
 |model|hpo1|hpo2|hpo3|score|
 |--|--|--|--|--|
-|initial|month|date|year|1.84672|
-|add_features|month|date|year|1.29553|
-|hpo|month|date|year|1.30813|
+|initial|default vals|default vals|default vals|1.84672|
+|add_features|default vals|default vals|default vals|1.29553|
+|hpo|hyperparameters = {
+    'NN': {'num_epochs': 10},
+    'GBM': {'num_boost_round': 100},
+    'CAT': {'iterations': 50},
+    'RF': {'n_estimators': 100},
+    'XT': {'n_estimators': 100},
+    'KNN': {},
+    'LR': {}
+}|hyperparameter_tune_kwargs = {
+    'num_trials': 10,
+    'search_strategy': 'random',
+    'searcher': 'random',  
+    'scheduler': 'local'  
+}|default vals|1.30813|
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
